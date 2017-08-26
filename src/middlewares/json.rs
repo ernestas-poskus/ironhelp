@@ -2,6 +2,7 @@ use iron::AfterMiddleware;
 use iron::prelude::*;
 use iron::headers::ContentType;
 
+/// Middleware for injecting JSON content type into defined route
 pub struct Json;
 
 impl AfterMiddleware for Json {

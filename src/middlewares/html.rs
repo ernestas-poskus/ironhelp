@@ -2,6 +2,8 @@ use iron::AfterMiddleware;
 use iron::prelude::*;
 use iron::headers::ContentType;
 
+/// Middleware for injecting HTML content type into defined route
+#[derive(Debug)]
 pub struct Html;
 
 impl AfterMiddleware for Html {
