@@ -43,7 +43,6 @@ macro_rules! redirect_301 {
     }}
 }
 
-
 #[macro_export]
 macro_rules! redirect_303 {
     ($url:expr) => {{
@@ -59,7 +58,7 @@ macro_rules! response_400 {
     ($err:expr) => {{
         use iron::prelude::Response;
         use iron::status;
-        Ok(Response::with((status::Unauthorized, $err)))
+        Ok(Response::with((status::BadRequest, $err)))
     }}
 }
 
