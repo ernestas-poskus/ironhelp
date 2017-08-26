@@ -4,6 +4,7 @@ use iron::{Chain, Handler};
 
 // local
 pub mod middlewares;
+mod macros;
 
 pub fn content_type_json<H: Handler>(routes: H) -> Chain {
     let mut chain: Chain = Chain::new(routes);
