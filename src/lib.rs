@@ -1,3 +1,5 @@
+#![feature(proc_macro)]
+
 #![warn(
     missing_docs,
     trivial_casts,
@@ -10,6 +12,7 @@
 //! Rust Iron framework helper macros & middleware's
 
 extern crate iron;
+extern crate maud;
 
 use iron::{Chain, Handler};
 
@@ -32,3 +35,6 @@ pub fn content_type_html<H: Handler>(routes: H) -> Chain {
     chain.link_after(middlewares::Html);
     chain
 }
+
+/// Navigation based on Foundation 6
+pub mod navigation;

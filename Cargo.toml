@@ -1,7 +1,11 @@
 [package]
+authors = ["Ernestas Poskus <ernestas.poskus@gmail.com>"]
 name = "ironhelp"
 version = "0.1.0"
-authors = ["Ernestas Poskus <ernestas.poskus@gmail.com>"]
 
 [dependencies]
 iron = "0.5.1"
+
+[dependencies.maud]
+features = ["iron"]
+version = "0.17.1"
