@@ -1,4 +1,5 @@
 use std::collections::BTreeMap;
+use iron::typemap;
 
 /// Convenience type alias for errors map
 pub type ValidationMap = BTreeMap<&'static str, Vec<&'static str>>;
@@ -22,6 +23,10 @@ impl ValidationError {
         errors_map.insert(key, errors);
         ValidationError { errors: errors_map }
     }
+}
+
+impl typemap::Key for ValidationError {
+    type Value = ValidationError;
 }
 
 #[test]
