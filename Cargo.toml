@@ -5,6 +5,12 @@ version = "0.1.0"
 
 [dependencies]
 iron = "0.5.1"
+plugin = "0.2.6"
+log = "0.3.8"
+
+[dependencies.cookie]
+features = ["secure"]
+version = "0.10.0"
 
 [dependencies.maud]
 features = ["iron"]

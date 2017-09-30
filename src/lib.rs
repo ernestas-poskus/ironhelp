@@ -13,6 +13,10 @@
 
 extern crate iron;
 extern crate maud;
+extern crate cookie;
+extern crate plugin;
+#[macro_use]
+extern crate log;
 
 use iron::{Chain, Handler};
 
