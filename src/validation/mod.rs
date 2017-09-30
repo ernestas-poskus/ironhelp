@@ -1,12 +1,15 @@
 use std::collections::BTreeMap;
 use iron::typemap;
+use std::fmt;
+use serde_json;
+use std::error::Error as StdError;
 
 /// Convenience type alias for errors map
 pub type ValidationMap = BTreeMap<&'static str, Vec<&'static str>>;
 
 /// Struct for keeping validation errors
 /// Generated JSON begins with "errors": { "x": "v" }
-#[derive(Serialize)]
+#[derive(Serialize, Debug)]
 pub struct ValidationError {
     errors: ValidationMap,
 }
@@ -29,12 +32,24 @@ impl typemap::Key for ValidationError {
     type Value = ValidationError;
 }
 
+impl fmt::Display for ValidationError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        f.write_str(&serde_json::to_string(&self).expect(
+            "fmt::Display ValidationMap serde_json serialization failed",
+        ))
+    }
+}
+
+impl StdError for ValidationError {
+    fn description(&self) -> &str {
+        "Validation errors"
+    }
+}
+
 #[test]
 fn test_serde() {
-    use serde_json;
-
     assert_eq!(
-        serde_json::to_string(&ValidationError::new_map("hi", vec!["e1", "e2"])).unwrap(),
+        ValidationError::new_map("hi", vec!["e1", "e2"]).to_string(),
         r#"{"errors":{"hi":["e1","e2"]}}"#
     );
 }
