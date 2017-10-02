@@ -2,6 +2,7 @@
 macro_rules! response_ok {
     ($view:expr) => {{
         use iron::prelude::Response;
+        use iron::status;
         Ok(Response::with((status::Ok, $view)))
     }}
 }
