@@ -18,9 +18,9 @@ pub struct Navigation {
     /// Possible to pass raw safe HTML output is pre escaped
     pub title: Option<&'static Item>,
     /// Left menu items
-    pub left: Option<&'static [Item]>,
+    pub left: Option<&'static [&'static Item]>,
     /// Right menu items
-    pub right: Option<&'static [Item]>,
+    pub right: Option<&'static [&'static Item]>,
 }
 
 impl Navigation {

@@ -2,18 +2,18 @@ extern crate ironhelp;
 
 use ironhelp::navigation::{Navigation, Item};
 
-const ITEMS: &'static [Item] = &[
-    Item {
+const ITEMS: &'static [&'static Item] = &[
+    &Item {
         path: "/tx1",
         title: "Some title",
         text: "TEXT1",
     },
-    Item {
+    &Item {
         path: "/tx2",
         title: "Some title",
         text: "TEXT2",
     },
-    Item {
+    &Item {
         path: "/tx3",
         title: "Some title",
         text: "TEXT3",
