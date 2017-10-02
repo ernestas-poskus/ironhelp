@@ -11,7 +11,8 @@ pub type ValidationMap = BTreeMap<&'static str, Vec<&'static str>>;
 /// Generated JSON begins with "errors": { "x": "v" }
 #[derive(Serialize, Debug)]
 pub struct ValidationError {
-    errors: ValidationMap,
+    /// Collected errors
+    pub errors: ValidationMap,
 }
 
 impl ValidationError {
