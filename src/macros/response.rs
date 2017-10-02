@@ -45,6 +45,16 @@ macro_rules! redirect_301 {
 }
 
 #[macro_export]
+macro_rules! redirect_302 {
+    ($url:expr) => {{
+        use iron::prelude::Response;
+        use iron::modifiers::Redirect;
+        use iron::status;
+        Ok(Response::with((status::Found, Redirect($url))))
+    }}
+}
+
+#[macro_export]
 macro_rules! redirect_303 {
     ($url:expr) => {{
         use iron::prelude::Response;
