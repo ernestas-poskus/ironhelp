@@ -23,8 +23,9 @@ impl typemap::Key for CookiesSession {
 
 impl BeforeMiddleware for CookiesSession {
     fn before(&self, req: &mut Request) -> IronResult<()> {
+        let mut jar: CookieJar = CookieJar::new();
+
         if let Some(cookies) = req.headers.get::<HeaderCookie>() {
-            let mut jar: CookieJar = CookieJar::new();
             for cookie in cookies.iter() {
                 match Cookie::parse(cookie.to_string()) {
                     Ok(c) => jar.add_original(c),
@@ -32,6 +33,8 @@ impl BeforeMiddleware for CookiesSession {
                 }
             }
 
+            req.extensions.insert::<CookiesSession>(jar);
+        } else {
             req.extensions.insert::<CookiesSession>(jar);
         }
 
@@ -41,13 +44,11 @@ impl BeforeMiddleware for CookiesSession {
 
 impl AfterMiddleware for CookiesSession {
     fn after(&self, req: &mut Request, mut resp: Response) -> IronResult<Response> {
-        if let Some(jar) = req.cookies() {
-            for delta in jar.delta() {
-                resp.headers.append_raw(
-                    SetCookie::header_name(),
-                    delta.to_string().into_bytes(),
-                );
-            }
+        for delta in req.cookies().delta() {
+            resp.headers.append_raw(
+                SetCookie::header_name(),
+                delta.to_string().into_bytes(),
+            );
         }
 
         Ok(resp)
@@ -57,17 +58,21 @@ impl AfterMiddleware for CookiesSession {
 /// Convenience trait for retrieving cookies from Iron request
 pub trait Session {
     /// Gets reference to cookies jar
-    fn cookies(&self) -> Option<&CookieJar>;
+    fn cookies(&self) -> &CookieJar;
     /// Gets mutable reference to cookies jar
-    fn mut_cookies(&mut self) -> Option<&mut CookieJar>;
+    fn mut_cookies(&mut self) -> &mut CookieJar;
 }
 
 impl<'a, 'b: 'a> Session for Request<'a, 'b> {
-    fn cookies(&self) -> Option<&CookieJar> {
-        self.extensions().get::<CookiesSession>()
+    fn cookies(&self) -> &CookieJar {
+        self.extensions().get::<CookiesSession>().expect(
+            "CookiesSession not included",
+        )
     }
 
-    fn mut_cookies(&mut self) -> Option<&mut CookieJar> {
-        self.extensions_mut().get_mut::<CookiesSession>()
+    fn mut_cookies(&mut self) -> &mut CookieJar {
+        self.extensions_mut().get_mut::<CookiesSession>().expect(
+            "CookiesSession not included",
+        )
     }
 }
