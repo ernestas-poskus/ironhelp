@@ -29,7 +29,7 @@ impl Navigation {
     pub fn render(&self, path: &str) -> Markup {
         html!(
             div.nav-top {
-                nav.top-bar role="navigation" {
+                nav.top-bar {
                     @if let Some(ref t) = self.title {
                         div.top-bar-title {
                             a href=(t.path) title=(t.title) (PreEscaped(t.text))
