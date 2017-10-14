@@ -47,3 +47,8 @@ pub fn content_type_html<H: Handler>(routes: H) -> Chain {
 
 /// Navigation based on Foundation 6
 pub mod navigation;
+
+/// Maud extras
+/// copy of: https://raw.githubusercontent.com/lfairy/maud/master/maud_extras/lib.rs
+#[allow(unused, missing_docs, unused_extern_crates)]
+pub mod maud_extras;
