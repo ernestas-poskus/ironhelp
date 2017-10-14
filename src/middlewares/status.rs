@@ -8,7 +8,7 @@ use iron::headers::ContentType;
 /// appropriate message
 pub struct StatusCatchMiddleware {
     /// Map of status codes with associated views
-    pub map: HashMap<status::Status, (ContentType, &'static str)>,
+    pub map: HashMap<status::Status, (ContentType, String)>,
 }
 
 impl StatusCatchMiddleware {
@@ -20,7 +20,7 @@ impl StatusCatchMiddleware {
     fn handle_status(&self, resp: &Response) -> Option<Response> {
         if let Some(ref status) = resp.status {
             if let Some(t) = self.map.get(status) {
-                let mut r = Response::with((status.clone(), t.1));
+                let mut r = Response::with((status.clone(), t.1.as_str()));
                 r.headers.set(t.0.clone());
 
                 Some(r)
