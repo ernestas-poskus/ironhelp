@@ -52,3 +52,6 @@ pub mod navigation;
 /// copy of: https://raw.githubusercontent.com/lfairy/maud/master/maud_extras/lib.rs
 #[allow(unused, missing_docs, unused_extern_crates)]
 pub mod maud_extras;
+
+/// Params validation
+pub mod params;
