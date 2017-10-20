@@ -4,7 +4,7 @@
 /// T - underlying type after validation
 pub trait ValidateStructParams<T, E, RE> {
     /// Either returns validated define type or expected errors
-    fn validate(&self) -> Result<StructParams<T, E>, RE>;
+    fn validate(self) -> Result<StructParams<T, E>, RE>;
 }
 
 /// Returns valid/invalid params
