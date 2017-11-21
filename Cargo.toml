@@ -4,17 +4,17 @@ name = "ironhelp"
 version = "0.1.0"
 
 [dependencies]
-iron = "0.5.1"
-plugin = "0.2.6"
+iron = "0.6.0"
 log = "0.3.8"
-serde = "1.0.15"
-serde_derive = "1.0.15"
-serde_json = "1.0.3"
+plugin = "0.2.6"
+serde = "1.0.21"
+serde_derive = "1.0.21"
+serde_json = "1.0.6"
 
 [dependencies.cookie]
 features = ["secure"]
-version = "0.10.0"
+version = "0.10.1"
 
 [dependencies.maud]
 features = ["iron"]
-version = "0.17.1"
+version = "0.17.2"
