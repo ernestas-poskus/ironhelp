@@ -20,6 +20,7 @@ extern crate log;
 extern crate serde_json;
 #[macro_use]
 extern crate serde_derive;
+extern crate router;
 
 use iron::{Chain, Handler};
 
@@ -55,3 +56,6 @@ pub mod maud_extras;
 
 /// Params validation
 pub mod params;
+
+/// Loaders validation
+pub mod loaders;
