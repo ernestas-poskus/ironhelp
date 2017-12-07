@@ -92,6 +92,15 @@ macro_rules! response_404 {
 }
 
 #[macro_export]
+macro_rules! response_405 {
+    () => {{
+        use iron::prelude::Response;
+        use iron::status;
+        Ok(Response::with((status::MethodNotAllowed, "")))
+    }}
+}
+
+#[macro_export]
 macro_rules! response_500 {
     ($err:expr) => {{
         use iron::prelude::Response;
