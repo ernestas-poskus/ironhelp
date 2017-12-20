@@ -12,4 +12,4 @@ pub use self::session::{Session, CookiesSession};
 pub use self::validation::ValidationMiddleware;
 pub use self::status::StatusCatchMiddleware;
 pub use self::logger::LoggerMiddleware;
-pub use self::access_control_allow_origin::ACAO;
+pub use self::access_control_allow_origin::AccessControlAllowOriginMiddleware;
