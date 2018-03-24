@@ -7,9 +7,8 @@ pub struct AccessControlAllowOriginMiddleware(pub String);
 
 impl AfterMiddleware for AccessControlAllowOriginMiddleware {
     fn after(&self, _req: &mut Request, mut resp: Response) -> IronResult<Response> {
-        resp.headers.set(
-            AccessControlAllowOrigin::Value(self.0.clone()),
-        );
+        resp.headers
+            .set(AccessControlAllowOrigin::Value(self.0.clone()));
         Ok(resp)
     }
 }

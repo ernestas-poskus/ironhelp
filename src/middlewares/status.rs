@@ -14,7 +14,9 @@ pub struct StatusCatchMiddleware {
 impl StatusCatchMiddleware {
     /// Initialize status catch middleware
     pub fn new() -> StatusCatchMiddleware {
-        StatusCatchMiddleware { map: HashMap::new() }
+        StatusCatchMiddleware {
+            map: HashMap::new(),
+        }
     }
 
     fn handle_status(&self, resp: &Response) -> Option<Response> {

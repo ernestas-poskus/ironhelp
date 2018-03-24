@@ -1,5 +1,5 @@
 use iron::Request;
-use router::{Router, Params};
+use router::{Params, Router};
 
 /// RouterLoader - gets Router from Iron Request
 pub trait RouterLoader {
@@ -10,8 +10,8 @@ pub trait RouterLoader {
 impl<'a, 'b: 'a> RouterLoader for Request<'a, 'b> {
     /// router - method to get Router from Iron Request
     fn router(&self) -> &Params {
-        self.extensions.get::<Router>().expect(
-            "Router must be loaded by middleware",
-        )
+        self.extensions
+            .get::<Router>()
+            .expect("Router must be loaded by middleware")
     }
 }

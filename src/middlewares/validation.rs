@@ -1,4 +1,4 @@
-use iron::{AfterMiddleware, IronResult, Request, Response, IronError, status};
+use iron::{status, AfterMiddleware, IronError, IronResult, Request, Response};
 use validation::ValidationError;
 
 /// ValidationMiddleware responds with BadRequest and serialized

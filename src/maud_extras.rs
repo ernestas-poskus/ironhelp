@@ -3,7 +3,7 @@
 
 extern crate maud;
 
-use maud::{Markup, Render, html};
+use maud::{html, Markup, Render};
 
 pub struct Css<T: AsRef<str>>(pub T);
 

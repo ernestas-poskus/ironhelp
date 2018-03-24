@@ -1,5 +1,5 @@
 use iron::middleware::BeforeMiddleware;
-use iron::{Request, IronResult, typemap, IronError, status, method};
+use iron::{method, status, typemap, IronError, IronResult, Request};
 use plugin::Extensible;
 use std::io::Read;
 use std::error::Error;
@@ -53,13 +53,13 @@ impl BeforeMiddleware for RequestBodyMiddleware {
         match req.body.read_to_end(&mut body) {
             Ok(size_read) => {
                 if self.0 < size_read {
-                    return Err(IronError::new(RequestBodyError::PayloadTooLarge, (
-                        status::PayloadTooLarge,
-                        format!(
-                            "Payload too large, must be at most {} bytes",
-                            self.0
+                    return Err(IronError::new(
+                        RequestBodyError::PayloadTooLarge,
+                        (
+                            status::PayloadTooLarge,
+                            format!("Payload too large, must be at most {} bytes", self.0),
                         ),
-                    )));
+                    ));
                 }
 
                 req.extensions.insert::<RequestBodyMiddleware>(body);
@@ -80,8 +80,8 @@ pub trait RequestBody {
 
 impl<'a, 'b: 'a> RequestBody for Request<'a, 'b> {
     fn request_body(&self) -> &Vec<u8> {
-        self.extensions().get::<RequestBodyMiddleware>().expect(
-            "RequestBodyMiddleware not included",
-        )
+        self.extensions()
+            .get::<RequestBodyMiddleware>()
+            .expect("RequestBodyMiddleware not included")
     }
 }

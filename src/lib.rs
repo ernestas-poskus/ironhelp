@@ -1,26 +1,18 @@
 #![feature(proc_macro)]
-
-#![warn(
-    missing_docs,
-    trivial_casts,
-    trivial_numeric_casts,
-    unused_extern_crates,
-    unused_import_braces,
-    unused_qualifications,
-    variant_size_differences
-)]
+#![warn(missing_docs, trivial_casts, trivial_numeric_casts, unused_extern_crates,
+        unused_import_braces, unused_qualifications, variant_size_differences)]
 //! Rust Iron framework helper macros & middleware's
 
-extern crate iron;
-extern crate maud;
 extern crate cookie;
-extern crate plugin;
+extern crate iron;
 #[macro_use]
 extern crate log;
-extern crate serde_json;
+extern crate maud;
+extern crate plugin;
+extern crate router;
 #[macro_use]
 extern crate serde_derive;
-extern crate router;
+extern crate serde_json;
 
 use iron::{Chain, Handler};
 

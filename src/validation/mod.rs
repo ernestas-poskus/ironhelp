@@ -35,9 +35,8 @@ impl typemap::Key for ValidationError {
 
 impl fmt::Display for ValidationError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str(&serde_json::to_string(&self).expect(
-            "fmt::Display ValidationMap serde_json serialization failed",
-        ))
+        f.write_str(&serde_json::to_string(&self)
+            .expect("fmt::Display ValidationMap serde_json serialization failed"))
     }
 }
 

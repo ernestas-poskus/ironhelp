@@ -1,4 +1,4 @@
-use iron::{AfterMiddleware, BeforeMiddleware, IronResult, IronError, Request, Response};
+use iron::{AfterMiddleware, BeforeMiddleware, IronError, IronResult, Request, Response};
 use iron::typemap::Key;
 use std::time::Instant;
 
@@ -26,8 +26,8 @@ impl LoggerMiddleware {
         let entry_time = *req.extensions.get::<StartTime>().unwrap();
 
         let response_time = entry_time.elapsed();
-        let response_time_ms = (response_time.as_secs() * 1000) as f64 +
-            (response_time.subsec_nanos() as f64) / 1000000.0;
+        let response_time_ms = (response_time.as_secs() * 1000) as f64
+            + (response_time.subsec_nanos() as f64) / 1000000.0;
 
         {
             let status = match res.status {
@@ -40,11 +40,7 @@ impl LoggerMiddleware {
 
             info!(
                 "IP: {} Method: {}, Status: {}, Duration: {}ms, URL: {}",
-                remote_addr,
-                method,
-                status,
-                response_time_ms,
-                url,
+                remote_addr, method, status, response_time_ms, url,
             )
         }
 

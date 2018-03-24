@@ -1,8 +1,8 @@
-use iron::middleware::{BeforeMiddleware, AfterMiddleware};
+use iron::middleware::{AfterMiddleware, BeforeMiddleware};
 use iron::headers::{Cookie as HeaderCookie, SetCookie};
-use iron::{Request, Response, IronResult};
+use iron::{IronResult, Request, Response};
 use iron::typemap;
-use cookie::{CookieJar, Cookie};
+use cookie::{Cookie, CookieJar};
 use plugin::Extensible;
 use iron::headers::Header;
 
@@ -45,10 +45,8 @@ impl BeforeMiddleware for CookiesSession {
 impl AfterMiddleware for CookiesSession {
     fn after(&self, req: &mut Request, mut resp: Response) -> IronResult<Response> {
         for delta in req.cookies().delta() {
-            resp.headers.append_raw(
-                SetCookie::header_name(),
-                delta.to_string().into_bytes(),
-            );
+            resp.headers
+                .append_raw(SetCookie::header_name(), delta.to_string().into_bytes());
         }
 
         Ok(resp)
@@ -65,14 +63,14 @@ pub trait Session {
 
 impl<'a, 'b: 'a> Session for Request<'a, 'b> {
     fn cookies(&self) -> &CookieJar {
-        self.extensions().get::<CookiesSession>().expect(
-            "CookiesSession not included",
-        )
+        self.extensions()
+            .get::<CookiesSession>()
+            .expect("CookiesSession not included")
     }
 
     fn mut_cookies(&mut self) -> &mut CookieJar {
-        self.extensions_mut().get_mut::<CookiesSession>().expect(
-            "CookiesSession not included",
-        )
+        self.extensions_mut()
+            .get_mut::<CookiesSession>()
+            .expect("CookiesSession not included")
     }
 }
