@@ -3,6 +3,8 @@ use iron::typemap;
 use std::fmt;
 use serde_json;
 use std::error::Error as StdError;
+use iron::{status, IronError};
+use std::convert::From;
 
 /// Convenience type alias for errors map
 pub type ValidationMap = BTreeMap<&'static str, Vec<&'static str>>;
@@ -43,6 +45,13 @@ impl fmt::Display for ValidationError {
 impl StdError for ValidationError {
     fn description(&self) -> &str {
         "Validation errors"
+    }
+}
+
+impl From<ValidationError> for IronError {
+    fn from(e: ValidationError) -> Self {
+        let json_error = e.to_string();
+        IronError::new(e, (json_error, status::BadRequest))
     }
 }
 
