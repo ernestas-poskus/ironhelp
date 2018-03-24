@@ -46,8 +46,5 @@ pub mod navigation;
 #[allow(unused, missing_docs, unused_extern_crates)]
 pub mod maud_extras;
 
-/// Params validation
-pub mod params;
-
 /// Loaders validation
 pub mod loaders;
