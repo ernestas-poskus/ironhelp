@@ -22,6 +22,9 @@ mod macros;
 /// Validation struct for housing errors
 pub mod validation;
 
+/// Validator trait
+pub mod validator;
+
 /// Injects JSON after middleware into given route(s)
 /// and inserts json content type
 pub fn content_type_json<H: Handler>(routes: H) -> Chain {
