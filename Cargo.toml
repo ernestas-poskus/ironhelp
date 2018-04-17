@@ -15,7 +15,3 @@ serde_json = "1.0.14"
 [dependencies.cookie]
 features = ["secure"]
 version = "0.10.1"
-
-[dependencies.maud]
-features = ["iron"]
-version = "0.17.2"
