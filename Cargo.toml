@@ -5,13 +5,13 @@ version = "0.1.0"
 
 [dependencies]
 iron = "0.6.0"
-log = "0.4.1"
+log = "0.4.3"
 plugin = "0.2.6"
 router = "0.6.0"
-serde = "1.0.38"
-serde_derive = "1.0.38"
-serde_json = "1.0.14"
+serde = "1.0.70"
+serde_derive = "1.0.70"
+serde_json = "1.0.24"
 
 [dependencies.cookie]
 features = ["secure"]
-version = "0.10.1"
+version = "0.11.0"

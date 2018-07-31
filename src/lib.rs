@@ -1,6 +1,12 @@
-#![feature(proc_macro)]
-#![warn(missing_docs, trivial_casts, trivial_numeric_casts, unused_extern_crates,
-        unused_import_braces, unused_qualifications, variant_size_differences)]
+#![warn(
+    missing_docs,
+    trivial_casts,
+    trivial_numeric_casts,
+    unused_extern_crates,
+    unused_import_braces,
+    unused_qualifications,
+    variant_size_differences
+)]
 //! Rust Iron framework helper macros & middleware's
 
 extern crate cookie;
@@ -15,9 +21,9 @@ extern crate serde_json;
 
 use iron::{Chain, Handler};
 
+mod macros;
 /// All available middlewares
 pub mod middlewares;
-mod macros;
 /// Validation struct for housing errors
 pub mod validation;
 
