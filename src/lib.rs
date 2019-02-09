@@ -9,7 +9,6 @@
 )]
 //! Rust Iron framework helper macros & middleware's
 
-extern crate cookie;
 extern crate iron;
 #[macro_use]
 extern crate log;

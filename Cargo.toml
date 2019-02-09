@@ -11,7 +11,3 @@ router = "0.6.0"
 serde = "1.0.70"
 serde_derive = "1.0.70"
 serde_json = "1.0.24"
-
-[dependencies.cookie]
-features = ["secure"]
-version = "0.11.0"
